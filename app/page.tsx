@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import EmblaCarousel from "./components/EmblaCarousel";
 import Image from "next/image";
 
 export default function Home() {
@@ -61,7 +62,7 @@ export default function Home() {
 
       <Container pt="pt-80">
         <div className="py-14 px-10 bg-white/10 rounded-3xl backdrop-blur-md shadow-[0_0_100px_4px_rgba(255,255,255,0.3),inset_0_0_30px_2px_rgba(255,255,255,0.2)] mb-20">
-          asdasd
+          <EmblaCarousel />
         </div>
       </Container>
       <Footer />

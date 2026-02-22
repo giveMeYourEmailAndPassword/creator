@@ -19,3 +19,125 @@ body {
   font-family: "Impact", sans-serif;
   color: white;
 }
+
+/* Embla Carousel */
+.embla {
+  max-width: 48rem;
+  margin: auto;
+  --slide-height: 16rem;
+  --slide-spacing: 0.75rem;
+  --slide-size: 70%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+.embla__parallax {
+  border-radius: 1rem;
+  height: var(--slide-height);
+  overflow: hidden;
+}
+
+.embla__parallax__layer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.embla__parallax__img {
+  max-width: none;
+  flex: 0 0 calc(115% + (var(--slide-spacing) * 2));
+  object-fit: cover;
+  width: auto !important;
+  height: 100% !important;
+}
+
+.embla__viewport-wrapper {
+  position: relative;
+}
+
+.embla__overlay-button {
+  position: absolute;
+  top: 0;
+  width: 35%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.embla__overlay-button--prev {
+  left: 0;
+}
+
+.embla__overlay-button--next {
+  right: 0;
+}
+
+.embla__overlay-button:disabled {
+  cursor: default;
+}
+
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.embla__dot {
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.embla__dot::after {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: background-color 0.2s;
+}
+
+.embla__dot--selected::after {
+  background-color: white;
+}
