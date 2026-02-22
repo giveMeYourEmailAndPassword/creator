@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import type { EmblaEventType } from "embla-carousel";
 import { usePrevNextButtons } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import Image from "next/image";
@@ -53,14 +54,14 @@ const EmblaCarousel: React.FC = () => {
   const tweenParallax = useCallback(
     (
       emblaApi: ReturnType<typeof useEmblaCarousel>[1],
-      event?: { type: string },
+      event?: EmblaEventType,
     ) => {
       if (!emblaApi) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const engine = emblaApi.internalEngine() as any;
       const scrollProgress = emblaApi.scrollProgress();
       const slidesInView = emblaApi.slidesInView();
-      const isScrollEvent = event?.type === "scroll";
+      const isScrollEvent = event === "scroll";
 
       emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
         let diffToTarget = scrollSnap - scrollProgress;
@@ -105,11 +106,11 @@ const EmblaCarousel: React.FC = () => {
     tweenParallax(emblaApi);
 
     emblaApi
-      .on("reinit", setTweenNodes)
-      .on("reinit", setTweenFactor)
-      .on("reinit", tweenParallax)
+      .on("reInit", setTweenNodes)
+      .on("reInit", setTweenFactor)
+      .on("reInit", tweenParallax)
       .on("scroll", tweenParallax)
-      .on("slidefocus", tweenParallax);
+      .on("slideFocus", tweenParallax);
   }, [emblaApi, tweenParallax, setTweenNodes, setTweenFactor]);
 
   return (
