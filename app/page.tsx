@@ -1,24 +1,28 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
-import Header from './components/Header'
-import Container from './components/Container'
-import Footer from './components/Footer'
-import ScrollToTop from './components/ScrollToTop'
+import { useState, useEffect } from "react";
+import Header from "./components/Header";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import Image from "next/image";
 
 export default function Home() {
-  const [dimOpacity, setDimOpacity] = useState(0)
+  const [dimOpacity, setDimOpacity] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const start = 0
-      const end = 600
-      const progress = Math.min(Math.max((window.scrollY - start) / (end - start), 0), 1)
-      setDimOpacity(progress * 0.5)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      const start = 0;
+      const end = 600;
+      const progress = Math.min(
+        Math.max((window.scrollY - start) / (end - start), 0),
+        1,
+      );
+      setDimOpacity(progress * 0.5);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div
@@ -34,12 +38,24 @@ export default function Home() {
       <Container pt="pt-20">
         <div className="py-14 px-10 bg-white/10 rounded-3xl backdrop-blur-md shadow-[0_0_100px_4px_rgba(255,255,255,0.3),inset_0_0_30px_2px_rgba(255,255,255,0.2)]">
           <h1 className="text-5xl">VISUAL DEVELOPMENT</h1>
+          <Image
+            src="/container/photo_1_2026-02-22_13-37-45.jpg"
+            alt="Visual Development"
+            width={400}
+            height={300}
+          />
         </div>
       </Container>
 
       <Container pt="pt-80">
         <div className="py-14 px-10 bg-white/10 rounded-3xl backdrop-blur-md shadow-[0_0_100px_4px_rgba(255,255,255,0.3),inset_0_0_30px_2px_rgba(255,255,255,0.2)]">
           <h1 className="text-5xl">ILLUSTRATION</h1>
+          <Image
+            src="/container/photo_2_2026-02-22_13-37-45.jpg"
+            alt="Visual Development"
+            width={400}
+            height={300}
+          />
         </div>
       </Container>
 
@@ -51,5 +67,5 @@ export default function Home() {
       <Footer />
       <ScrollToTop />
     </div>
-  )
+  );
 }
