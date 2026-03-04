@@ -37,7 +37,7 @@ export default function Home() {
       <div
         className="fixed inset-0 z-[-1] will-change-transform"
         style={{
-          backgroundImage: "url('/bg-orig.png')",
+          backgroundImage: "url('/bg-orig44.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
