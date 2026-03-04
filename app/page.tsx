@@ -10,6 +10,7 @@ import Image from "next/image";
 
 export default function Home() {
   const [dimOpacity, setDimOpacity] = useState(0);
+  const [bgOffset, setBgOffset] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,16 +21,29 @@ export default function Home() {
         1,
       );
       setDimOpacity(progress * 0.5);
+      // Subtle parallax: scroll down → bg moves down, scroll up → bg moves up
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFraction = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      setBgOffset(Math.min(scrollFraction * 40, 22));
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed w-full relative"
-      style={{ backgroundImage: "url('/bg-orig-2.png')" }}
-    >
+    <div className="min-h-screen w-full relative overflow-hidden">
+      {/* Parallax background */}
+      <div
+        className="fixed inset-0 z-[-1] will-change-transform"
+        style={{
+          backgroundImage: "url('/bg-orig.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          transform: `translateY(-${bgOffset}px) scale(1.05)`,
+        }}
+      />
       <div
         className="fixed inset-0 bg-black pointer-events-none z-0 transition-opacity duration-0"
         style={{ opacity: dimOpacity }}
